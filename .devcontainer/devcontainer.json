@@ -1,0 +1,73 @@
+{
+  // Dev container definition. Reference: https://containers.dev/implementors/json_reference/
+  "name": "Argo CD",
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  "forwardPorts": [
+    // API server
+    8080,
+    // UI
+    4000,
+    // Helm registry
+    5000
+  ],
+
+  "hostRequirements": {
+    "cpus": 4
+  },
+
+  "runArgs": [
+    "--add-host=host.docker.internal:host-gateway",
+    "--add-host=dex:127.0.0.1",
+    "--add-host=minio:127.0.0.1",
+    "--add-host=postgres:127.0.0.1",
+    "--add-host=mysql:127.0.0.1",
+    "--add-host=azurite:127.0.0.1"
+  ],
+
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      // Should ideally match GOLANG_VERSION in .github/workflows/ci-build.yaml
+      "version": "1.25.3"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      // Should ideally match node-version in .github/workflows/ci-build.yaml
+      "version": "22.9.0"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  "postCreateCommand": ".devcontainer/pre-build.sh",
+  //"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/go/src/github.com/argoproj/argo-workflows,type=bind",
+  //"workspaceFolder": "/home/vscode/go/src/github.com/argoproj/argo-workflows",
+  //"remoteEnv": {
+  //  "PATH": "${containerEnv:PATH}:/home/vscode/go/bin",
+  //  "GOPATH": "/home/vscode/go"
+  //},
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "docs/developer-guide/running-locally.md"
+      ]
+    },
+    "vscode": {
+      "settings": {
+        "launch": {
+          "configurations": [
+            {
+              "name": "Attach to argocd server",
+              "type": "go",
+              "request": "attach",
+              "mode": "local",
+              "processId": "argo"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
