@@ -20,14 +20,6 @@
     "cpus": 4
   },
 
-  "runArgs": [
-    "--add-host=host.docker.internal:host-gateway",
-    "--add-host=dex:127.0.0.1",
-    "--add-host=minio:127.0.0.1",
-    "--add-host=postgres:127.0.0.1",
-    "--add-host=mysql:127.0.0.1",
-    "--add-host=azurite:127.0.0.1"
-  ],
 
   "features": {
     "ghcr.io/devcontainers/features/go:1": {
