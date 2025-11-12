@@ -20,7 +20,6 @@
     "cpus": 4
   },
 
-
   "features": {
     "ghcr.io/devcontainers/features/go:1": {
       // Should ideally match GOLANG_VERSION in .github/workflows/ci-build.yaml
@@ -34,12 +33,6 @@
   },
 
   "postCreateCommand": ".devcontainer/pre-build.sh",
-  //"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/go/src/github.com/argoproj/argo-workflows,type=bind",
-  //"workspaceFolder": "/home/vscode/go/src/github.com/argoproj/argo-workflows",
-  //"remoteEnv": {
-  //  "PATH": "${containerEnv:PATH}:/home/vscode/go/bin",
-  //  "GOPATH": "/home/vscode/go"
-  //},
   "customizations": {
     "codespaces": {
       "openFiles": [
