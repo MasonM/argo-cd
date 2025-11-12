@@ -6,6 +6,8 @@ k3d cluster get k3s-default || k3d cluster create --image "rancher/k3s:${K8S_VER
 k3d kubeconfig merge --kubeconfig-merge-default
 kubectl cluster-info
 
+# Install standard tools
+make install-tools-local
+
 # Install Goreman: https://github.com/mattn/goreman#installation
 go install github.com/mattn/goreman@latest
-make install-tools-local

@@ -33,6 +33,7 @@
   },
 
   "postCreateCommand": ".devcontainer/pre-build.sh",
+
   "customizations": {
     "codespaces": {
       "openFiles": [

@@ -12,8 +12,6 @@ ARG TARGETARCH
 # k3d releases: https://github.com/k3d-io/k3d/releases
 ARG K3D_VERSION=v5.8.3
 
-#ARG TILT_VERSION=v0.35.2
-
 # This is the minimum supported Kubernetes version in .github/workflows/ci-build.yaml
 # Using the minimum version helps catch BC-breaking changes as early as possible.
 # TODO: Dedupe like in https://github.com/argoproj/argo-workflows/pull/14176
