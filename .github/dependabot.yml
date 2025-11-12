@@ -53,6 +53,14 @@ updates:
     schedule:
       interval: "daily"
 
+  # Docs: https://containers.dev/guide/dependabot
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # ignore all non-security updates: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#open-pull-requests-limit
+    open-pull-requests-limit: 0
+
 # Disabled since this code is rarely used.
 #  - package-ecosystem: "docker"
 #    directory: "/ui-test/"
