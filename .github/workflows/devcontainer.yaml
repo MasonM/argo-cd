@@ -1,0 +1,48 @@
+name: Dev Container
+
+on:
+  push:
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/devcontainer.yaml"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/devcontainer.yaml"
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    if: github.repository == 'argoproj/argo-cd'
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
+        with:
+          # Workaround for segfaults under arm64:
+          # https://github.com/docker/setup-qemu-action/issues/198#issuecomment-2653791775
+          image: tonistiigi/binfmt:qemu-v7.0.0-28
+      - uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+      - name: Login to registry
+        if: ${{ github.event_name == 'push' }}
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: quay.io
+          username: ${{ secrets.RELEASE_QUAY_USERNAME }}
+          password: ${{ secrets.RELEASE_QUAY_TOKEN }}
+      - name: Build dev container image
+        run: make devcontainer-build
+        env:
+          TARGET_PLATFORM: linux/amd64,linux/arm64
+          DEVCONTAINER_PUSH: ${{ github.event_name == 'push' && 'true' || 'false' }}

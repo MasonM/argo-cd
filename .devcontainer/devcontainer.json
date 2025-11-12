@@ -1,61 +1,7 @@
 {
   // Dev container definition. Reference: https://containers.dev/implementors/json_reference/
-  "name": "Argo CD",
+  "name": "Argo CD (pre-built)",
 
-  // TODO: Add CI pipeline to prebuild and validate this, like in https://github.com/argoproj/argo-workflows/pull/14341
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
-
-  "forwardPorts": [
-    // API server
-    8080,
-    // UI
-    4000,
-    // Helm registry
-    5000
-  ],
-
-  "hostRequirements": {
-    // This is mainly here for CodeSpaces, since otherwise it'll default to 2 CPUs, which is unusably slow
-    "cpus": 4
-  },
-
-  "features": {
-    "ghcr.io/devcontainers/features/go:1": {
-      // Should ideally match GOLANG_VERSION in .github/workflows/ci-build.yaml
-      "version": "1.25.3"
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      // Should ideally match node-version in .github/workflows/ci-build.yaml
-      "version": "22.9.0"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
-
-  "postCreateCommand": ".devcontainer/pre-build.sh",
-
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-        "docs/developer-guide/running-locally.md"
-      ]
-    },
-    "vscode": {
-      "settings": {
-        "launch": {
-          "configurations": [
-            {
-              "name": "Attach to argocd server",
-              "type": "go",
-              "request": "attach",
-              "mode": "local",
-              "processId": "argo"
-            }
-          ]
-        }
-      }
-    }
-  }
+  // This image is built and pushed by .github/workflows/devcontainer.yaml using .devcontainer/builder/devcontainer.json
+  "image": "quay.io/argoproj/argo-cd-devcontainer"
 }
