@@ -17,13 +17,13 @@ ARG K3D_VERSION=v5.8.3
 # TODO: Dedupe like in https://github.com/argoproj/argo-workflows/pull/14176
 ENV K8S_VERSION=v1.30.4
 
-# install k3d
+# Docs: https://k3d.io/stable/#install-specific-release
 RUN wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=${K3D_VERSION} bash
 
-# install kubectl
+# Docs: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux
 RUN wget -O /usr/local/bin/kubectl "https://dl.k8s.io/release/${K8S_VERSION}/bin/linux/${TARGETARCH}/kubectl" && \
   chmod +x /usr/local/bin/kubectl
 
-# install Tilt: https://docs.tilt.dev/install.html#manual-install
+# Docs: https://docs.tilt.dev/install.html#manual-install
 #RUN curl -fsSL https://github.com/tilt-dev/tilt/releases/download/${TILT_VERSION}/tilt.${TILT_VERSION}.linux.${TARGETARCH}.tar.gz | tar -xzv tilt && \
 #  mv tilt /usr/local/bin/tilt
