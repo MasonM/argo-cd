@@ -2,10 +2,10 @@
   // Dev container definition. Reference: https://containers.dev/implementors/json_reference/
   "name": "Argo CD (builder)",
 
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "../.."
-  },
+  // Use Ubuntu 22 since most jobs in .github/workflows/ci-build.yaml run on ubuntu-22.04
+  // The dev environment should ideally match the CI pipeline as closely as feasible
+  // to minimize the "works on my machine" problem.
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
 
   "forwardPorts": [
     // API server
@@ -30,10 +30,12 @@
       // Should ideally match node-version in .github/workflows/ci-build.yaml
       "version": "22.9.0"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/rio/features/k3d:1": {},
+    "ghcr.io/lentzi90/features/tilt:0": {}
   },
 
-  "postCreateCommand": ".devcontainer/pre-build.sh",
+  "postCreateCommand": ".devcontainer/post-create.sh",
 
   "customizations": {
     "codespaces": {

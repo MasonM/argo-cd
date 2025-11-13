@@ -14,6 +14,16 @@
       "version": "1.6.3",
       "resolved": "ghcr.io/devcontainers/features/node@sha256:3c35dff2aedeaeb86f03e10c265c29b56a1b3609324d83d6e901dbb6032543a4",
       "integrity": "sha256:3c35dff2aedeaeb86f03e10c265c29b56a1b3609324d83d6e901dbb6032543a4"
+    },
+    "ghcr.io/lentzi90/features/tilt:0": {
+      "version": "0.1.4",
+      "resolved": "ghcr.io/lentzi90/features/tilt@sha256:c83bcf6f8d1a311c52fc35f3dfabc13d3767b91df711a35915fd035e1ece4753",
+      "integrity": "sha256:c83bcf6f8d1a311c52fc35f3dfabc13d3767b91df711a35915fd035e1ece4753"
+    },
+    "ghcr.io/rio/features/k3d:1": {
+      "version": "1.1.0",
+      "resolved": "ghcr.io/rio/features/k3d@sha256:0ada2620215533142ee90ac19e5903c345418a51d23457cd0b3da142013a8464",
+      "integrity": "sha256:0ada2620215533142ee90ac19e5903c345418a51d23457cd0b3da142013a8464"
     }
   }
 }
