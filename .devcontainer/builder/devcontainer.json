@@ -44,16 +44,22 @@
   },
 
   "features": {
+    // Docs: https://github.com/devcontainers/features/blob/main/src/go
     "ghcr.io/devcontainers/features/go:1": {
       // Should ideally match GOLANG_VERSION in .github/workflows/ci-build.yaml
-      "version": "1.25.3"
+      "version": "1.25.3",
+      "golangciLintVersion": "2.5.0"
     },
+    // Docs: https://github.com/devcontainers/features/tree/main/src/node
     "ghcr.io/devcontainers/features/node:1": {
       // Should ideally match node-version in .github/workflows/ci-build.yaml
       "version": "22.9.0"
     },
+    // Docs: https://github.com/devcontainers/features/blob/main/src/docker-in-docker
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    // Docs: https://github.com/rio/features/tree/main/src/k3d
     "ghcr.io/rio/features/k3d:1": {},
+    // Docs: https://github.com/lentzi90/features/tree/main/src/tilt
     "ghcr.io/lentzi90/features/tilt:0": {}
   },
 
