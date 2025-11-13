@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -eux
 
-# Install standard tools
-make install-tools-local
+# Install required tools for Tilt and testing
+make install-test-tools-local
 
 # Grab the minimum supported Kubernetes version in .github/workflows/ci-build.yaml
 # using similar logic to hack/update-supported-versions.sh
