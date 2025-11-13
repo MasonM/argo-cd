@@ -7,14 +7,36 @@
   // to minimize the "works on my machine" problem.
   "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
 
-  "forwardPorts": [
-    // API server
-    8080,
-    // UI
-    4000,
-    // Helm registry
-    5000
-  ],
+  "portsAttributes": {
+    // Should match docs/developer-guide/tilt.md#port-forwarding
+    "8080": { "label": "argocd-server API" },
+    "9345": { "label": "argocd-server debug" },
+    "8083": { "label": "argocd-server metrics" },
+
+    "8081": { "label": "argocd-repo-server API" },
+    "8084": { "label": "argocd-repo-server metrics" },
+    "9346": { "label": "argocd-repo-server debug" },
+
+    "6379": { "label": "argocd-redis API" },
+
+    "8085": { "label": "argocd-applicationset-controller metrics" },
+    "7000": { "label": "argocd-applicationset-controller webhook" },
+    "9347": { "label": "argocd-applicationset-controller debug" },
+
+    "8086": { "label": "argocd-application-controller metrics" },
+    "9348": { "label": "argocd-application-controller debug" },
+
+    "8087": { "label": "argocd-notifications-controller metrics" },
+    "9349": { "label": "argocd-notifications-controller debug" },
+
+    "8089": { "label": "argocd-commit-server API" },
+    "8088": { "label": "argocd-commit-server metrics" },
+    "9350": { "label": "argocd-commit-server debug" },
+
+    "4000": { "label": "argocd-ui" },
+    "5000": { "label": "Helm registry" },
+    "10350": { "label": "Tilt" }
+  },
 
   "hostRequirements": {
     // This is mainly here for CodeSpaces, since otherwise it'll default to 2 CPUs, which is unusably slow
@@ -48,11 +70,58 @@
         "launch": {
           "configurations": [
             {
-              "name": "Attach to argocd server",
+              "name": "Connect to server",
               "type": "go",
               "request": "attach",
-              "mode": "local",
-              "processId": "argo"
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9345,
+              "host": "127.0.0.1"
+            },
+            {
+              "name": "Connect to repo-server",
+              "type": "go",
+              "request": "attach",
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9346,
+              "host": "127.0.0.1"
+            },
+            {
+              "name": "Connect to applicationset-controller",
+              "type": "go",
+              "request": "attach",
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9347,
+              "host": "127.0.0.1"
+            },
+            {
+              "name": "Connect to application-controller",
+              "type": "go",
+              "request": "attach",
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9348,
+              "host": "127.0.0.1"
+            },
+            {
+              "name": "Connect to notifications-controller",
+              "type": "go",
+              "request": "attach",
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9349,
+              "host": "127.0.0.1"
+            },
+            {
+              "name": "Connect to commit-server",
+              "type": "go",
+              "request": "attach",
+              "mode": "remote",
+              "remotePath": "${workspaceFolder}",
+              "port": 9350,
+              "host": "127.0.0.1"
             }
           ]
         }
