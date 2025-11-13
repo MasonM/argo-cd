@@ -661,6 +661,10 @@ snyk-non-container-tests:
 snyk-report:
 	./hack/snyk-report.sh $(target_branch)
 
+.PHONY: devcontainer-build
+devcontainer-build:
+	./hack/devcontainer-build.sh
+
 .PHONY: help
 help:
 	@echo 'Note: Generally an item w/ (-local) will run inside docker unless you use the -local variant'

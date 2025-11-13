@@ -44,5 +44,5 @@ jobs:
       - name: Build dev container image
         run: make devcontainer-build
         env:
-          TARGET_PLATFORM: linux/amd64,linux/arm64
+          TARGET_ARCH: linux/amd64,linux/arm64
           DEVCONTAINER_PUSH: ${{ github.event_name == 'push' && 'true' || 'false' }}
